@@ -1,0 +1,19 @@
+{
+  "name": "frumkvodlafraedi_verzlo",
+  "version": "1.0.0",
+  "description": "Frumköðlafræðiverkefni",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivaroliRU/frumkvodlafraedi_verzlo.git"
+  },
+  "author": "Ívar Óli Sigurðsson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ivaroliRU/frumkvodlafraedi_verzlo/issues"
+  },
+  "homepage": "https://github.com/ivaroliRU/frumkvodlafraedi_verzlo#readme"
+}
