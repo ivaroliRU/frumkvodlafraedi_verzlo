@@ -4,7 +4,9 @@
   "description": "Frumköðlafræðiverkefni",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node app.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
