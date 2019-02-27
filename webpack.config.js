@@ -23,11 +23,6 @@ var config = {
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: SRC_DIR + "/index.html"
-        })
-    ],
     devServer: {
         port: 5000,
         open: true,
