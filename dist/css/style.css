@@ -125,6 +125,24 @@ body{
     color: white;
 }
 
+#gohome{
+    color: black;
+    position: absolute;
+    font-size: 25px;
+    top: 50px;
+    left: 20px;
+}
+
+.cart-heading{
+    background-color: #e9ecef;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+#remove-item{
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 768px) {
     .navbar{
         background-color: rgba(255, 255, 255, 0.9) !important;

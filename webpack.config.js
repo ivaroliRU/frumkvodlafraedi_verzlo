@@ -6,10 +6,12 @@ var SRC_DIR = path.resolve(__dirname, "src/client");
 
 var config = {
     mode: 'development',
-    entry: SRC_DIR + "/main.js",
+    entry : {
+        main: SRC_DIR + "/main.js",
+        cart: SRC_DIR + "/cart.js"},
     output: {
         path: DIST_DIR,
-        filename: "main.min.js"
+        filename: "[name].min.js"
     },
     module: {
         rules: [
