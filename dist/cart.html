@@ -9,6 +9,8 @@
     <script src="lib/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
 
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
     <link rel="stylesheet" href="lib/bootstrap-4.2.1-dist/css/bootstrap.min.css">
@@ -16,8 +18,8 @@
 </head>
 
 <body class="stylish-color-dark">
-    <a href="/" id="gohome"><i class="fas fa-arrow-left"></i> Heim</a>
     <div class="jumbotron cart-heading">
+        <a href="/" id="gohome"><i class="fas fa-arrow-left"></i> Heim</a>
         <div class="text-center">
             <img class="d-block mx-auto mb-4" src="images/sylque.svg" alt="" height="150">
             <h2>Ganga frá pöntun</h2>
@@ -25,7 +27,7 @@
                 fylgdu leiðbeiningum greiðslu ferlis.</p>
         </div>
     </div>
-    <div class="container" id="app">
+    <div class="container cart-container" id="app">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -198,22 +200,12 @@
         <!-- Social buttons -->
         <ul class="list-unstyled list-inline text-center social-buttons">
             <li class="list-inline-item">
-                <a class="social-button">
-                    <i class="fab fa-cc-visa"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="social-button">
-                    <i class="fab fa-cc-mastercard"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="social-button">
+                <a class="social-button" href="https://www.instagram.com/sylque_koddaver/">
                     <i class="fab fa-instagram"></i>
                 </a>
             </li>
             <li class="list-inline-item">
-                <a class="social-button">
+                <a class="social-button" href="https://www.facebook.com/sylque.koddaver/">
                     <i class="fab fa-facebook-f"></i>
                 </a>
             </li>

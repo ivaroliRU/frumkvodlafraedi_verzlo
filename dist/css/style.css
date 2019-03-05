@@ -81,6 +81,7 @@ body{
      font-size: 30px;
      padding-left: 20px;
      padding-right: 20px;
+     color: #333;
  }
 
  .front-product-image{
@@ -139,6 +140,10 @@ body{
     margin-bottom: 20px;
 }
 
+.cart-container{
+    margin-bottom: 25px;
+}
+
 #remove-item{
     cursor: pointer;
 }
@@ -150,5 +155,9 @@ body{
 
     #cart{
         border-width: 0px !important;
+    }
+
+    #gohome{
+        position: initial;
     }
 }
