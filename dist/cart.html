@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sylque - Karfa</title>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="lib/bootstrap-4.2.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="stylish-color-dark">
+    <div class="jumbotron cart-heading">
+        <a href="/" id="gohome"><i class="fas fa-arrow-left"></i> Heim</a>
+        <div class="text-center">
+            <img class="d-block mx-auto mb-4" src="images/sylque.svg" alt="" height="150">
+            <h2>Ganga frá pöntun</h2>
+            <p class="lead">Fyrir neðan eru upplýsingar um kaupanda sem þarf nauðsinlega að fylla út svo hægt sé að ganga frá pöntun. Vinsamlegast
+                fylgdu leiðbeiningum greiðslu ferlis.</p>
+        </div>
+    </div>
+    <div class="container cart-container" id="app">
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Karfan þín</span>
+                    <span class="badge badge-secondary badge-pill">{{ order.products.length }}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in order.products" v-bind:data-id="product.id">
+                        <div class="remove-item"><i class="fas fa-times"></i></div>
+                        <div>
+                            <h6 class="my-0">{{ product.title }}</h6>
+                        </div>
+                        <span class="text-muted">{{ product.price }} ISK</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Samtals (ISK)</span>
+                        <strong id="order-price">{{ order.price }}</strong>
+                    </li>
+                </ul>
+
+                <form class="card p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Promo code">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary">Redeem</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Upplýsingar viðskiptavinar</h4>
+                <form class="needs-validation">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Fornafn</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Eftirnafn</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address">Heimilisfang</label>
+                        <input type="text" class="form-control" id="address" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="floor">Íbúðarnúmer/Hæð
+                            <span class="text-muted">(Ekki nauðsinlegt)</span>
+                        </label>
+                        <input type="text" class="form-control" id="floor" placeholder="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email">Netfang
+                            <span class="text-muted">(Ekki nauðsinlegt)</span>
+                        </label>
+                        <input type="email" class="form-control" id="email" placeholder="">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone">Sími</label>
+                        <input type="text" class="form-control" id="phone" placeholder="">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city">Staður/Bær</label>
+                            <input type="text" class="form-control" id="city" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Zip code required.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Ganga frá greiðslu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="page-footer font-small stylish-color-dark pt-4">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">About Us</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Some More Info</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua.
+                    </p>
+
+                </div>
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center social-buttons">
+            <li class="list-inline-item">
+                <a class="social-button" href="https://www.instagram.com/sylque_koddaver/">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="social-button" href="https://www.facebook.com/sylque.koddaver/">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <b> Sylque</b>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+    <script src="cart.min.js"></script>
+</body>
+
+</html>
