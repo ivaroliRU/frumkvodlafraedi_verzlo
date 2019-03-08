@@ -150,7 +150,46 @@ body{
 
 @media only screen and (max-width: 768px) {
     .navbar{
-        background-color: rgba(255, 255, 255, 0.9) !important;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: rgba(255, 255, 255, 1) !important;
+    }
+
+    .carousel-item img{
+        height: 600px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    #cart{
+        border-width: 0px !important;
+    }
+
+    #gohome{
+        position: initial;
+    }
+
+    .carousel-caption{
+        z-index: 3;
+        color: #333;
+        padding-bottom: 80px;
+    }
+    
+    .carousel-caption>.row>.col-md-12>img{
+        height: 100px !important;
+        width: auto !important;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .navbar{
+        background-color: rgba(255, 255, 255, 1) !important;
+    }
+
+    .carousel-item img{
+        height: 600px;
+        width: 100%;
+        object-fit: cover;
     }
 
     #cart{
