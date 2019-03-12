@@ -1,5 +1,5 @@
-body{
-    /*background-color: #ebe7df;*/
+html {
+    scroll-behavior: smooth;
 }
 
 .overlay{
@@ -38,13 +38,29 @@ body{
 }
 
 .frontpage-container{
-    margin-top: 40px;
+    padding-top: 60px;
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
+}
+
+#Contact{
+    margin-bottom: 50px;
 }
 
 .frontpage-container h4{
     margin-bottom: 40px;
+}
+
+#founders{
+    overflow: hidden;
+}
+
+.founder-img{
+    /*width: 159px;
+    height: 159px;*/
+    width: 10vw;
+    height: 10vw;
+    object-fit: cover;
 }
 
 .text-divider {
@@ -179,6 +195,14 @@ body{
         height: 100px !important;
         width: auto !important;
     }
+
+    .founder-img{
+        /*width: 159px;
+        height: 159px;*/
+        width: 30vw;
+        height: 30vw;
+        object-fit: cover;
+    }
 }
 
 @media only screen and (max-width: 990px) {
@@ -194,6 +218,11 @@ body{
 
     #cart{
         border-width: 0px !important;
+        padding-left: 5px;
+    }
+
+    #karfa-text{
+        display: block;
     }
 
     #gohome{
