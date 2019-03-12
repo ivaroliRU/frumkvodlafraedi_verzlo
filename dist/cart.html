@@ -19,7 +19,8 @@
 
 <body class="stylish-color-dark">
     <div class="jumbotron cart-heading">
-        <a href="/" id="gohome"><i class="fas fa-arrow-left"></i> Heim</a>
+        <a href="/" id="gohome">
+            <i class="fas fa-arrow-left"></i> Heim</a>
         <div class="text-center">
             <img class="d-block mx-auto mb-4" src="images/sylque.svg" alt="" height="150">
             <h2>Ganga frá pöntun</h2>
@@ -36,7 +37,9 @@
                 </h4>
                 <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in order.products" v-bind:data-id="product.id">
-                        <div class="remove-item"><i class="fas fa-times"></i></div>
+                        <div class="remove-item">
+                            <i class="fas fa-times"></i>
+                        </div>
                         <div>
                             <h6 class="my-0">{{ product.title }}</h6>
                         </div>
@@ -48,30 +51,30 @@
                     </li>
                 </ul>
 
-                <form class="card p-2">
+                <div class="card p-2">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Promo code">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-secondary">Redeem</button>
+                            <button type="submit" class="btn btn-secondary" id="promocode-btn">Redeem</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Upplýsingar viðskiptavinar</h4>
-                <form class="needs-validation">
+                <div class="checkout-form">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">Fornafn</label>
                             <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="invalid-feedback-fname">
                                 Valid first name is required.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="lastName">Eftirnafn</label>
                             <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="invalid-feedback-lname">
                                 Valid last name is required.
                             </div>
                         </div>
@@ -80,7 +83,7 @@
                     <div class="mb-3">
                         <label for="address">Heimilisfang</label>
                         <input type="text" class="form-control" id="address" placeholder="" required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" id="invalid-feedback-address">
                             Please enter your shipping address.
                         </div>
                     </div>
@@ -90,9 +93,6 @@
                             <span class="text-muted">(Ekki nauðsinlegt)</span>
                         </label>
                         <input type="text" class="form-control" id="floor" placeholder="">
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -100,38 +100,67 @@
                             <span class="text-muted">(Ekki nauðsinlegt)</span>
                         </label>
                         <input type="email" class="form-control" id="email" placeholder="">
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="phone">Sími</label>
-                        <input type="text" class="form-control" id="phone" placeholder="">
+                        <input type="tel" class="form-control" id="phone" placeholder="">
+                        <div class="invalid-feedback" id="invalid-feedback-phone">
+                            Please enter a valid phone number.
+                        </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="city">Staður/Bær</label>
                             <input type="text" class="form-control" id="city" required>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="invalid-feedback-city">
                                 Please provide a valid state.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="zip">Zip</label>
                             <input type="text" class="form-control" id="zip" placeholder="" required>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="invalid-feedback-zip">
                                 Zip code required.
                             </div>
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Ganga frá greiðslu</button>
-                </form>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" id="checkout-btn">Ganga frá greiðslu</button>
+                </div>
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Þakka þér fyrir viðskiptin</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Leiðbeiningar til þess að ganga frá pöntun:</h4>
+                    <h6>Til þess að geta gengið frá pöntun þá þarf að millifæra annað hvort í gegnum heima banka</h6>
+                    <p>Kennitala: xxxxxx-xxxx</p>
+                    <p>Reiknings númer: xxxxxxxxxx</p>
+                    <h6>Eða í gagnum aur</h6>
+                    <p>Sími: xxx-xxxx</p>
+                    <h4>Einkennis númer: <b id="order-id"></b></h4>
+                    <b>ATH!</b>
+                    <p>Til þess að við getum séð pöntunina þá þarf að setja einkennis númerið hér fyrir ofan sem útskýringu.</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Halda áfram</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="page-footer font-small stylish-color-dark pt-4">
 

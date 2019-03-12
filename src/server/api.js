@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
-var fs = require('fs');
+const fs = require('fs');
+const uniqid = require('uniqid');
+const repo = require('./productRepository');
 const app = express();
 
 //location of all static files such as "index.html"
@@ -9,8 +11,12 @@ var files = path.normalize("./dist");
 
 //setup
 //app is able to get static files such as CSS files
-//app.use(bodyParser());
 app.use('/', express.static(files));
+// configure the app to use bodyParser()
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 //get request on the index page
 //localhost:3000 or https://tictactoe-hugb.herokuapp.com/
@@ -33,6 +39,17 @@ app.get("/:file", (req, res) => {
     else{
         res.status(404).end();
     }
+});
+
+app.post("/checkout", (req, res) => {
+    id = uniqid.time();
+    req.body.id = id;
+
+    repo.insertOrder(req.body, function(result){
+        console.log(result);
+    });
+
+    res.status(200).send(id);
 });
 
 module.exports = app;
