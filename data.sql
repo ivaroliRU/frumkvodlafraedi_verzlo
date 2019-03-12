@@ -1,3 +1,8 @@
+drop table orders;
+drop table orderdetails;
+drop table products;
+drop table codes;
+
 CREATE TABLE products(
     id SERIAL NOT NULL PRIMARY KEY,
     name varchar(100) not null,
