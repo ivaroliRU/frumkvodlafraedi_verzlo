@@ -1,9 +1,9 @@
 const pg = require('pg')
 const connectionString = process.env.DATABASE_URL;//"postgres://postgres:postgres@localhost:5432/sylque";
-
-var client = new pg.Client(connectionString);
+console.log(connectionString);
 
 module.exports.getProductTypes = async function (callback) {
+    var client = new pg.Client(connectionString);
     await client.connect();
     var res = await client.query("SELECT * FROM products");
     await client.end();
@@ -12,6 +12,7 @@ module.exports.getProductTypes = async function (callback) {
 }
 
 module.exports.insertOrder = async function (data, callback) {
+    var client = new pg.Client(connectionString);
     await client.connect();
     let query = "INSERT INTO orderdetails(orderId, FirstName, LastName, address, floor, email, phone, city, zip) values ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
     let values = [data.id, data.FirstName, data.LastName, data.address, data.floor, data.email, data.phone, data.city, data.zip];
