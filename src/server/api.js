@@ -40,10 +40,10 @@ app.use(session({
 }));
 
 const oidc = new ExpressOIDC({
-    issuer: 'https://dev-679635.okta.com/oauth2/default',//`${process.env.ORG_URL}/oauth2/default`,
-    client_id: '0oadarl83lvOT0xVk356',//process.env.CLIENT_ID,
-    client_secret: '_iD-3wLLbnPwvYDVeavJoGIEN71QuY9nDbeYkcsL',//process.env.CLIENT_SECRET,
-    redirect_uri: 'http://localhost:3000/authorization-code/callback',//`${process.env.HOST_URL}/authorization-code/callback`,
+    issuer: `${process.env.ORG_URL}/oauth2/default`,//'https://dev-679635.okta.com/oauth2/default',
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
+    redirect_uri: `${process.env.HOST_URL}/authorization-code/callback`,
     scope: '',//'openid profile',
 });
 
