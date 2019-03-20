@@ -1,9 +1,9 @@
 const service = require('./productService');
 const cookies = require('./cookiecreator');
 
-var productTypes = service.productTypes();
+const productTypes = service.productTypes();
 
-function getOrder(){
+module.exports.getOrder = function(){
     var productCookies = cookies.getCookie("products-cart").split("|")
 
     order = {
@@ -23,12 +23,3 @@ function getOrder(){
 
     return order;
 }
-
-module.exports.order = getOrder()
-
-var app = new Vue({
-    el: '#app',
-    data: {
-        order:order
-    }
-})

@@ -1,9 +1,8 @@
-const vueApp = require('../logic/vue-index-app');
 const cookies = require('../logic/cookiecreator');
 
-function addToCart(product){
+function addToCart(product, name){
     $('#alertModal').modal('show');
-    $("#added-product").text($("#product-title").text());
+    $("#added-product").text(name);
 
 
     var current_cookies = cookies.getCookie('products-cart').split("|");
@@ -27,6 +26,7 @@ function addToCart(product){
 $(document).ready(function(){
     $('.product-karfa-btn').on('click', function(e){
         var id = $(event.target).parent().attr("data-id");
-        addToCart(id);
+        var name = $(event.target).parent().attr("data-title");
+        addToCart(id, name);
     })
 })
