@@ -1,8 +1,29 @@
-const vueApp = require('../logic/vue-cart-app');
+const orderCreator = require('../logic/orderCreator');
 const cookies = require('../logic/cookiecreator');
+var baseOrder = orderCreator.getOrder();
+const addPrice = 790;
+
+function insertProducts(){
+    for(var i = 0; i < baseOrder.products.length; i++){
+        var element = `
+        <li class="list-group-item d-flex justify-content-between lh-condensed" data-id="${baseOrder.products[i].id}">
+            <div class="remove-item">
+                <i class="fas fa-times"></i>
+            </div>
+            <div>
+                <h6 class="my-0">${baseOrder.products[i].title}</h6>
+            </div>
+            <span class="text-muted">${baseOrder.products[i].price} ISK</span>
+        </li>
+        `;
+        
+        $('#order-price').text(baseOrder.price);
+        $('#product-list').prepend(element);
+    }
+}
 
 function validate(){
-    if(vueApp.order.products.length == 0){
+    if(baseOrder.products.length == 0){
         return null;
     }
 
@@ -15,7 +36,8 @@ function validate(){
         phone: $('#phone').val(),
         city: $('#city').val(),
         zip: $('#zip').val(),
-        order: vueApp.order.products
+        order: baseOrder.products,
+        sOption: $('input[name = "send-option"]:checked').val()
     };
     
     var valid = true;
@@ -26,17 +48,17 @@ function validate(){
     $('#invalid-feedback-city').hide();
     $('#invalid-feedback-zip').hide();
 
-    if(!order_details.FirstName.match(/^([a-zA-Z]+)$/)){
+    if(!order_details.FirstName.match(/^(.+)$/)){
         $('#invalid-feedback-fname').show();
         valid = false;
     }
 
-    if(!order_details.LastName.match(/^([a-zA-Z]+)$/)){
+    if(!order_details.LastName.match(/^(.+)$/)){
         $('#invalid-feedback-lname').show();
         valid = false;
     }
 
-    if(!order_details.address.match(/^([a-zA-Z 0-9]+)$/)){
+    if(!order_details.address.match(/^(.+ [0-9]*)$/)){
         $('#invalid-feedback-address').show();
         valid = false;
     }
@@ -53,6 +75,11 @@ function validate(){
 
     if(!order_details.zip.match(/^([0-9]{3})$/)){
         $('#invalid-feedback-zip').show();
+        valid = false;
+    }
+
+    if(order_details.sOption == ""){
+        $('#invalid-feedback-soption').show();
         valid = false;
     }
 
@@ -80,28 +107,28 @@ function getPromoCode(code){
 function removeCookie(product){
     console.log("removing product: " + product);
     
-    for(var i = 0; i < vueApp.order.products.length; i++){
-        console.log(vueApp.order.products[i]);
+    for(var i = 0; i < baseOrder.products.length; i++){
+        console.log(baseOrder.products[i]);
         
-        if(vueApp.order.products[i].id == product){
+        if(baseOrder.products[i].id == product){
             console.log("Removing product: " + product);
             
-            vueApp.order.price -= vueApp.order.products[i].price;
-            vueApp.order.products.splice(i, 1);
+            baseOrder.price -= baseOrder.products[i].price;
+            baseOrder.products.splice(i, 1);
             break;
         }
     }
 
-    console.log(vueApp.order);
+    console.log(baseOrder);
     
     var cookie_string = "";
 
-    for(var i = 0; i < vueApp.order.products.length; i++){
+    for(var i = 0; i < baseOrder.products.length; i++){
         if(i != 0){
-            cookie_string += "|" + vueApp.order.products[i];
+            cookie_string += "|" + baseOrder.products[i];
         }
         else{
-            cookie_string += vueApp.order.products[i];
+            cookie_string += baseOrder.products[i];
         }
     }
 
@@ -109,15 +136,22 @@ function removeCookie(product){
 }
 
 $(document).ready(function(){
+    insertProducts();
     $('.remove-item').on('click', function(e){
+        console.log("ASDF");
+        
         var id = $(e.target).parent().parent().attr("data-id");
         removeCookie(id);
-        $(e.target.id).remove();
-        $('#order-price').text(vueApp.order.price);
+
+        baseOrder = orderCreator.getOrder();
+
+        $(e.target).parent().parent().remove();
+        $('#order-price').text(baseOrder.price);
     });
 
     $('#checkout-btn').on('click', function(){
         var checkoutObj = validate();
+        console.log(checkoutObj);
 
         if(checkoutObj != null){
             checkout(checkoutObj);
@@ -126,6 +160,18 @@ $(document).ready(function(){
 
     $('#promocode-btn').on('click', function(){
 
+    });
+
+    $('input[name = "send-option"]').change(function() {
+        var value = $('input[name = "send-option"]:checked').val();
+        
+        if(value == "send-option-4"){
+            var newPrice = baseOrder.price + addPrice;
+            $('#order-price').text(newPrice);
+        }
+        else{
+            $('#order-price').text(baseOrder.price);
+        }
     });
 
     $('#alertModal').on('hidden.bs.modal', function () {

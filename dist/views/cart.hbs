@@ -1,0 +1,177 @@
+<div class="jumbotron cart-heading">
+    <a href="/" id="gohome">
+        <i class="fas fa-arrow-left"></i> Heim</a>
+    <div class="text-center">
+        <img class="d-block mx-auto mb-4" src="assets/images/sylque.svg" alt="" height="150">
+        <h2>Ganga frá pöntun</h2>
+        <p class="lead">Fyrir neðan eru upplýsingar um kaupanda sem þarf nauðsinlega að fylla út svo hægt sé að ganga frá pöntun. Vinsamlegast
+            fylgdu leiðbeiningum greiðslu ferlis.</p>
+    </div>
+</div>
+<div class="container cart-container">
+<div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Karfan þín</span>
+            <span class="badge badge-secondary badge-pill">{{ order.products.length }}</span>
+        </h4>
+        <ul class="list-group mb-3" id="product-list">
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Samtals (ISK)</span>
+                <strong id="order-price"></strong>
+            </li>
+        </ul>
+
+        <div class="card p-2">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Promo code">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary" id="promocode-btn">Redeem</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Upplýsingar viðskiptavinar</h4>
+        <div class="checkout-form">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">Fornafn</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    <div class="invalid-feedback" id="invalid-feedback-fname">
+                        Valid first name is required.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Eftirnafn</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                    <div class="invalid-feedback" id="invalid-feedback-lname">
+                        Valid last name is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address">Heimilisfang</label>
+                <input type="text" class="form-control" id="address" placeholder="" required>
+                <div class="invalid-feedback" id="invalid-feedback-address">
+                    Please enter your shipping address.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="floor">Íbúðarnúmer/Hæð
+                    <span class="text-muted">(Ekki nauðsinlegt)</span>
+                </label>
+                <input type="text" class="form-control" id="floor" placeholder="">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Netfang
+                    <span class="text-muted">(Ekki nauðsinlegt)</span>
+                </label>
+                <input type="email" class="form-control" id="email" placeholder="">
+            </div>
+
+            <div class="mb-3">
+                <label for="phone">Sími</label>
+                <input type="tel" class="form-control" id="phone" placeholder="">
+                <div class="invalid-feedback" id="invalid-feedback-phone">
+                    Please enter a valid phone number.
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="city">Staður/Bær</label>
+                    <input type="text" class="form-control" id="city" required>
+                    <div class="invalid-feedback" id="invalid-feedback-city">
+                        Please provide a valid state.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="zip">Zip</label>
+                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                    <div class="invalid-feedback" id="invalid-feedback-zip">
+                        Zip code required.
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+            <h4 class="mb-3">Sendingar Upplýsingar</h4>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="invalid-feedback" id="invalid-feedback-soption">
+                        Send option required.
+                    </div>
+                    <!-- Group of default radios - option 1 -->
+                    <div class="custom-control custom-radio" style="display: block;">
+                        <input type="radio" class="custom-control-input" id="send-option-1" name="send-option" value="send-option-1">
+                        <label class="custom-control-label" for="send-option-1">Sækja á vörumessu í Smáralind 5-6. apríl
+                            <b>(frítt)</b>
+                        </label>
+                    </div>
+
+                    <!-- Group of default radios - option 2 -->
+                    <div class="custom-control custom-radio" style="display: block;">
+                        <input type="radio" class="custom-control-input" id="send-option-2" name="send-option" value="send-option-2" checked>
+                        <label class="custom-control-label" for="send-option-2">Sækja í Verzló frá kl: 8-14 á virkum dögum
+                            <b>(frítt)</b>
+                        </label>
+                    </div>
+
+                    <!-- Group of default radios - option 3 -->
+                    <div class="custom-control custom-radio" style="display: block;">
+                        <input type="radio" class="custom-control-input" id="send-option-3" name="send-option" value="send-option-3">
+                        <label class="custom-control-label" for="send-option-3">Heimkeyrsla innan höfuðborgarsvæðisins, Selfoss og Hveragerði
+                            <b>(frítt)</b>
+                        </label>
+                    </div>
+
+                    <!-- Group of default radios - option 4 -->
+                    <div class="custom-control custom-radio" style="display: block;">
+                        <input type="radio" class="custom-control-input" id="send-option-4" name="send-option" value="send-option-4">
+                        <label class="custom-control-label" for="send-option-4">Fá sent með almennum pósti á landsbyggðina
+                            <b>(790kr)</b>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit" id="checkout-btn">Ganga frá greiðslu</button>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle">Þakka þér fyrir viðskiptin</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Leiðbeiningar til þess að ganga frá pöntun:</h4>
+                <h6>Til þess að geta gengið frá pöntun þá þarf að millifæra annað hvort í gegnum heima banka</h6>
+                <p>Kennitala: 030100-3950</p>
+                <p>Reiknings númer: 0370-26-007838</p>
+                <h6>Eða í gagnum aur</h6>
+                <p>Sími: xxx-xxxx</p>
+                <h4>Einkennis númer:
+                    <b id="order-id"></b>
+                </h4>
+                <b>ATH!</b>
+                <p>Til þess að við getum séð pöntunina þá þarf að setja einkennis númerið hér fyrir ofan sem útskýringu.</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Halda áfram</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -34,7 +34,10 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "@okta/oidc-middleware": "^0.1.2",
     "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "express-session": "^1.15.6",
     "jquery": "^3.3.1",
     "pg": "^7.8.2",
     "uniqid": "^5.0.3",
