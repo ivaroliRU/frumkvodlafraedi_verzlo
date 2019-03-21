@@ -6,12 +6,17 @@ var router = express.Router();
 
 //get request on diffirent pages
 router.get("/", (req, res) => {
-    var scripts = [];
-    repo.getProductTypes(function(result){
+    var scripts = [{ script: 'assets/js/dashboard.min.js' }];
+    repo.getOrderInformation('', function(response) {
+        console.log(response);
+        
         res.render('dashboard', {
-            products : result,
             scripts: scripts ,
+            data: response,
             layout: 'main', 
+            helpers: {
+                json: function () { return "typpi"; }
+            } 
         });
     });
 });
@@ -29,6 +34,21 @@ router.get("/assets/:file", (req, res) => {
     else{
         res.status(404).end();
     }
+});
+
+
+router.get("/products", (req, res) => {
+    var id = req.query.userID;
+    console.log(id);
+    
+});
+
+
+router.post("/updateOrderStatus", (req, res) => {
+    console.log(req.body);
+    repo.updateInfo(req.body,function(){
+        res.end();
+    });
 });
 
 module.exports = router

@@ -36,3 +36,65 @@ module.exports.insertOrder = async function (data, callback) {
     }
 }
 
+module.exports.getOrderInformation = async function (id,callback) {
+    var client = new pg.Client(connectionString);
+    let response = {
+        new: [],
+        recieved: [],
+        old: []
+    };
+
+    await client.connect();
+    //getting the order details
+    var orderDetails = await client.query("select * from orderdetails where orderid like $1", ['%'+id+'%']);
+    var totalPrice = 0;
+
+    //getting the individual product order inside an order
+    for(var i = 0; i < orderDetails.rows.length; i++){
+        totalPrice = 0;
+        let order = orderDetails.rows[i];
+        var orders = await client.query("SELECT p.name, p.price from orders o join products p on p.id = o.productID where o.detailId = $1;", [order.orderid]);
+        order.orders = orders.rows;
+
+        for(var j = 0; j < orders.rows.length; j++){
+            totalPrice += orders.rows[j].price;
+        }
+
+        if(order.soption == 'send-option-4'){
+            totalPrice += 790;
+        }
+
+        order.totalPrice = totalPrice;
+
+        //Diffirent stages of products
+        if(!order.paid){
+            response.new.push(orderDetails.rows[i]);
+        }
+        else if(!order.sent){
+            response.recieved.push(orderDetails.rows[i]);
+        }
+        else{
+            response.old.push(orderDetails.rows[i]);
+        }
+    }
+    await client.end();
+
+    callback(response);
+}
+
+module.exports.getDiscountInformation = async function (id,callback) {
+    var client = new pg.Client(connectionString);
+    await client.connect();
+    var codes = await client.query("SELECT code, discount from codes where id = $1;", [id]);
+    await client.end();
+
+    callback(codes.rows);
+}
+
+module.exports.updateInfo = async function (info,callback) {
+    var client = new pg.Client(connectionString);
+    await client.connect();
+    var codes = await client.query("UPDATE orderdetails SET sent = $1, paid = $2 WHERE orderId = $3;", [info.sent, info.payment, info.id]);
+    await client.end();
+    callback();
+}

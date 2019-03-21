@@ -18,7 +18,12 @@ app.engine('.hbs', exphbs({
         defaultLayout: 'main', 
         extname: '.hbs',
         layoutsDir: files + '/views/layouts',
-        partialsDir: files + '/views/partials'
+        partialsDir: files + '/views/partials',
+        helpers: {
+            toJSON : function(object) {
+                return JSON.stringify(object);
+            }
+        }
 }));
 app.set('view engine', '.hbs');
 
@@ -40,7 +45,7 @@ app.use(session({
 }));
 
 const oidc = new ExpressOIDC({
-    issuer: `${process.env.ORG_URL}/oauth2/default`,//'https://dev-679635.okta.com/oauth2/default',
+    issuer: `${process.env.ORG_URL}/oauth2/default`,
     client_id: process.env.CLIENT_ID,
     client_secret: process.env.CLIENT_SECRET,
     redirect_uri: `${process.env.HOST_URL}/authorization-code/callback`,

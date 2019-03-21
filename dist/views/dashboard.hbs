@@ -1,0 +1,98 @@
+<div class="jumbotron cart-heading">
+    <div class="text-center">
+        <img class="d-block mx-auto mb-4" src="assets/images/sylque.svg" alt="" height="150">
+    </div>
+</div>
+<div class="container dashboard-container">
+    <div id="search-bar">
+
+    </div>
+    <div id="new-orders-container">
+        <h2 class="order-class-headding">Nýjar pantanir:</h2>
+        <div class="list-group" id="new-orders">
+            {{#each data.new}}
+            <div class="list-group-item" data='{{{toJSON this}}}'>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="list-group-item-heading">{{this.orderid}}</h4>
+                        <p class="list-group-item-text">{{this.firstname}} {{this.lastname}}</p>
+                    </div>
+                    <div class="col-md-2 update-order-button" data-id="{{this.orderid}}" data-type="send">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-2 update-order-button" data-id="{{this.orderid}}" data-type="update-payment">
+                        <i class="far fa-money-bill-alt"></i>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <h4 class="no-orders">Engar nýjar pantanir!</h4>
+            {{/each}}
+        </div>
+    </div>
+    <div id="recieved-orders-container">
+        <h2 class="order-class-headding">Mótteknar pantanir:</h2>
+        <div id="recieved-orders">
+            {{#each data.recieved}}
+            <div class="list-group-item" data='{{{toJSON this}}}'>
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4 class="list-group-item-heading">{{this.orderid}}</h4>
+                        <p class="list-group-item-text">{{this.firstname}} {{this.lastname}}</p>
+                    </div>
+                    <div class="col-md-2 update-order-button" data-id="{{this.orderid}}" data-type="send">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <h4 class="no-orders">Engar mótteknar pantanir!</h4>
+            {{/each}}
+        </div>
+    </div>
+    <div id="sent-orders-container">
+        <h2 class="order-class-headding">Sendar pantanir:</h2>
+        <div id="sent-orders">
+            {{#each data.old}}
+            <div class="list-group-item" data='{{{toJSON this}}}'>
+                <h4 class="list-group-item-heading">{{this.orderid}}</h4>
+                <p class="list-group-item-text">{{this.firstname}} {{this.lastname}}</p>
+            </div>
+            {{else}}
+            <h4 class="no-orders">Engar sendar pantanir!</h4>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="order-detail-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <b>First Name: </b><div id="order-detail-fname" style="display: inline;"></div><br>
+                <b>Last Name: </b><div id="order-detail-lname" style="display: inline;"></div><br>
+                <b>City: </b><div id="order-detail-city" style="display: inline;"></div><br>
+                <b>Zip: </b><div id="order-detail-zip" style="display: inline;"></div><br>
+                <b>Address: </b><div id="order-detail-address" style="display: inline;"></div><br>
+                <b>Email: </b><div id="order-detail-email" style="display: inline;"></div><br>
+                <b>Phone: </b><div id="order-detail-phone" style="display: inline;"></div><br>
+                <b>Send Option: </b><div id="order-detail-option" style="display: inline;"></div><br>
+                <hr>
+                <h5>Orders</h5>
+                <ul id="order-detail-orders">
+                </ul>
+                <hr>
+                <h5>Total price: <span id="dash-order-price"></span></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
