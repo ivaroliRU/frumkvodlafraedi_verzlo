@@ -8,7 +8,9 @@ var config = {
     mode: 'development',
     entry : {
         main: SRC_DIR + "/main.js",
-        cart: SRC_DIR + "/cart.js"},
+        cart: SRC_DIR + "/cart.js",
+        dashboard: SRC_DIR + "/dashboard.js"
+    },
     output: {
         path: DIST_DIR,
         filename: "[name].min.js"

@@ -58,7 +58,7 @@ function validate(){
         valid = false;
     }
 
-    if(!order_details.address.match(/^(.+ [0-9]*)$/)){
+    if(!order_details.address.match(/^(.+ *[0-9]*)$/)){
         $('#invalid-feedback-address').show();
         valid = false;
     }
@@ -68,7 +68,7 @@ function validate(){
         valid = false;
     }
 
-    if(!order_details.city.match(/^([a-zA-Z]+)$/)){
+    if(!order_details.city.match(/^(.+)$/)){
         $('#invalid-feedback-city').show();
         valid = false;
     }

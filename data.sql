@@ -51,3 +51,9 @@ UPDATE products SET price = 6990 WHERE ID > 0;
 UPDATE products SET image = 'assets/images/pillow2.jpg' WHERE ID = 1;
 UPDATE products SET image = 'assets/images/pillow1.jpg' WHERE ID = 2;
 UPDATE products SET image = 'assets/images/pillow3.jpg' WHERE ID = 3;
+
+
+SELECT p.name, p.price
+from orders o
+join products p on p.id = o.productID
+where o.detailId = 'jtftlws9';
