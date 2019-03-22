@@ -24,6 +24,7 @@ module.exports.insertOrder = async function (data, callback) {
             let values2 =  [data.id, data.order[i].id];
             await client.query(query2, values2);
         }
+        
         await client.end();
 
         callback(res.rows);
