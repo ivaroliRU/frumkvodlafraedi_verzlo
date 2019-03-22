@@ -101,12 +101,21 @@
     </h4>
     <div class="row">
         {{#each products}}
-        <div class="col-lg-4" data-id="{{this.id}}" data-title="{{ this.title }}">
+        {{#if this.stock}}
+        <div class="col-lg-4" data-id="{{this.id}}" data-title="{{ this.name }}" data-stock="{{ this.stock }}">
             <img src="{{this.image}}" alt="" class="front-product-image">
-            <h3 id="product-title">{{ this.title }}</h3>
+            <h3 id="product-title">{{ this.name }}</h3>
             <p id="product-price">{{ this.price }} ISK</p>
             <button type="button" class="btn btn-default product-karfa-btn karfa-btn" id="p3-add-to-cart">Bæta við körfu</button>
         </div>
+        {{else}}
+        <div class="col-lg-4" data-id="{{this.id}}" data-title="{{ this.name }}" data-stock="{{ this.stock }}">
+            <img src="{{this.image}}" alt="" class="front-product-image">
+            <h3 id="product-title">{{ this.name }}</h3>
+            <p id="product-price">{{ this.price }} ISK</p>
+            <h4>Uppselt</h4>
+        </div>
+        {{/if}}
         {{/each}}
     </div>
 </div>

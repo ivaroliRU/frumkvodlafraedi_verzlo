@@ -59,6 +59,6 @@ app.use('/dashboard', oidc.ensureAuthenticated(), dashboardRouter)
 app.get('/logout', (req, res) => {
     req.logout()
     res.redirect('/')
-})
+});
 
 module.exports = app;

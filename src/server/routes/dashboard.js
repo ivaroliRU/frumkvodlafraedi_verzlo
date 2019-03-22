@@ -37,13 +37,6 @@ router.get("/assets/:file", (req, res) => {
 });
 
 
-router.get("/products", (req, res) => {
-    var id = req.query.userID;
-    console.log(id);
-    
-});
-
-
 router.post("/updateOrderStatus", (req, res) => {
     console.log(req.body);
     repo.updateInfo(req.body,function(){

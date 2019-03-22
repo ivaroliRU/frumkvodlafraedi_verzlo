@@ -7,7 +7,8 @@ CREATE TABLE products(
     id SERIAL NOT NULL PRIMARY KEY,
     name varchar(100) not null,
     image varchar(150) not null,
-    price int not null
+    price int not null,
+    stock int not null
 );
 
 CREATE TABLE CODES(
@@ -41,10 +42,10 @@ CREATE TABLE ORDERS(
     FOREIGN KEY (productID) REFERENCES products (id)
 );
 
-INSERT INTO products(name, image, price) values
-('Sylque Black', 'assets/images/pillow2.jpg', 6990),
-('Sylque White', 'assets/images/pillow1.jpg', 6990),
-('Sylque Pink', 'assets/images/pillow3.jpg', 6990);
+INSERT INTO products(name, image, price, stock) values
+('Sylque Black', 'assets/images/pillow2.jpg', 6990, 10),
+('Sylque White', 'assets/images/pillow1.jpg', 6990, 10),
+('Sylque Pink', 'assets/images/pillow3.jpg', 6990, 10);
 
 
 UPDATE products SET price = 6990 WHERE ID > 0;
@@ -52,8 +53,40 @@ UPDATE products SET image = 'assets/images/pillow2.jpg' WHERE ID = 1;
 UPDATE products SET image = 'assets/images/pillow1.jpg' WHERE ID = 2;
 UPDATE products SET image = 'assets/images/pillow3.jpg' WHERE ID = 3;
 
+UPDATE products SET stock = 0 WHERE ID = 1;
+
 
 SELECT p.name, p.price
 from orders o
 join products p on p.id = o.productID
 where o.detailId = 'jtftlws9';
+
+
+
+--Procedure
+DROP TRIGGER IF EXISTS updateStock ON orders;
+DROP FUNCTION IF EXISTS updateStock();
+
+CREATE OR REPLACE FUNCTION updateStock()RETURNS TRIGGER 
+AS $$
+DECLARE
+    prev_stock INT;
+BEGIN
+    prev_stock := (SELECT P.stock
+    FROM products P
+    WHERE P.id = NEW.productID);
+
+    UPDATE Products P
+    SET stock = prev_stock - 1
+    WHERE id = NEW.productID;
+
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE TRIGGER updateStock
+    BEFORE INSERT OR UPDATE ON orders
+    FOR EACH ROW
+        execute procedure updateStock();

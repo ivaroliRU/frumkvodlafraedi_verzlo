@@ -25,8 +25,20 @@ function addToCart(product, name){
 
 $(document).ready(function(){
     $('.product-karfa-btn').on('click', function(e){
-        var id = $(event.target).parent().attr("data-id");
-        var name = $(event.target).parent().attr("data-title");
-        addToCart(id, name);
+        var stock = $(event.target).parent().attr("data-stock");
+
+        if(stock > 0){
+            stock--;
+
+            if(stock <= 0){
+                $(event.target).parent().append("<h4>Uppselt</h4>");
+                $(event.target).remove();
+            }
+
+            $(event.target).parent().attr("data-stock", stock);
+            var id = $(event.target).parent().attr("data-id");
+            var name = $(event.target).parent().attr("data-title");
+            addToCart(id, name);
+        }
     })
 })
