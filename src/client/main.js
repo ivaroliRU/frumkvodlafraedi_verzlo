@@ -1,6 +1,8 @@
 const cookies = require('../logic/cookiecreator');
 
 function addToCart(product, name){
+    console.log("Adding to cart: " + name + " with id: " + product);
+    
     $('#alertModal').modal('show');
     $("#added-product").text(name);
 
@@ -26,6 +28,8 @@ function addToCart(product, name){
 $(document).ready(function(){
     $('.product-karfa-btn').on('click', function(e){
         var stock = $(event.target).parent().attr("data-stock");
+        var id = $(event.target).parent().attr("data-id");
+        var name = $(event.target).parent().attr("data-title");
 
         if(stock > 0){
             stock--;
@@ -36,8 +40,6 @@ $(document).ready(function(){
             }
 
             $(event.target).parent().attr("data-stock", stock);
-            var id = $(event.target).parent().attr("data-id");
-            var name = $(event.target).parent().attr("data-title");
             addToCart(id, name);
         }
     })

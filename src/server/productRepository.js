@@ -6,17 +6,24 @@ console.log(connectionString);
 module.exports.getProductTypes = async function (callback) {
     var client = new pg.Client(connectionString);
     await client.connect();
-    var res = await client.query("SELECT id, name::bytea, image, price, stock from products");
-    res.rows[2].name = 'Rosé';//fix this later.... caracter encodin problem
+    var res = await client.query("SELECT id, name, image, price, stock from products");
+
+    for(var i = 0; i < res.rows.length; i++){
+        if(res.rows[i].name == 'Ros‚'){
+            res.rows[i].name = 'Rosé';
+        }
+    }
+
     await client.end();
 
     callback(res.rows);
 }
 
 module.exports.insertOrder = async function (data, callback) {
+    var client = new pg.Client(connectionString);
+    await client.connect();
+    await client.query('BEGIN');
     try{
-        var client = new pg.Client(connectionString);
-        await client.connect();
         let query = "INSERT INTO orderdetails(orderId, FirstName, LastName, address, floor, email, phone, city, zip, codeID, sent, paid, sOption) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, NULL, FALSE, FALSE, $10);";
         let values = [data.id, data.FirstName, data.LastName, data.address, data.floor, data.email, data.phone, data.city, data.zip, data.sOption];
         var res = await client.query(query, values);
@@ -27,15 +34,17 @@ module.exports.insertOrder = async function (data, callback) {
             await client.query(query2, values2);
         }
 
-        await client.end();
-
+        await client.query('COMMIT');
         callback(res.rows);
     }
     catch (e) {
         console.log("entering catch block");
-        console.log(e);
         console.log("leaving catch block");
+        await client.query('ROLLBACK');
         callback(null);
+    }
+    finally{
+        await client.end();
     }
 }
 

@@ -92,10 +92,17 @@ function validate(){
 function checkout(obj){
     console.log(obj);
     
-    $.post("/checkout", obj, function(data, status){
-        if(status == "success"){
+    $.ajax({
+        url: '/checkout',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(obj),
+        success: function (data) {
             $('#order-id').text(data);
             $('#alertModal').modal('show');
+        },
+        error: function(errorThrown ){
+            $('#errorModal').modal('show');
         }
     });
 }
