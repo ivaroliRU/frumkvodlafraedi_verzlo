@@ -49,11 +49,13 @@ INSERT INTO products(name, image, price, stock) values
 
 
 UPDATE products SET price = 6990 WHERE ID > 0;
-UPDATE products SET stock = 1 WHERE ID = 1;
 UPDATE products SET name = 'Blanco' WHERE ID = 2;
 UPDATE products SET name = 'Rosé' WHERE ID = 3;
 
-UPDATE products SET stock = 0 WHERE ID = 1;
+
+UPDATE products SET stock = 10 WHERE ID = 1;
+UPDATE products SET stock = 8 WHERE ID = 2;
+UPDATE products SET stock = 5 WHERE ID = 3;
 
 
 SELECT p.name, p.price
