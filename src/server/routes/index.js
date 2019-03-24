@@ -38,17 +38,20 @@ router.get("/assets/:file", (req, res) => {
 
 
 router.post("/checkout", (req, res) => {
+    console.log(req.body);
+    
     id = uniqid.time();
     req.body.id = id;
 
     repo.insertOrder(req.body, function(result){
         if(result != null){
+            console.log('Everything is fine');
             res.status(200).send(id);
         }
         else{
-            res.status(500).send("");
+            console.log('Everything is NOT fine');
+            res.status(409).send(new Error('The product is sold out'));
         }
-        console.log(result);
     });
 });
 
