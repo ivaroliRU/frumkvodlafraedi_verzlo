@@ -1,11 +1,13 @@
 const pg = require('pg')
+const utf8 = require('utf8');
 const connectionString = process.env.DATABASE_URL;//"postgres://postgres:postgres@localhost:5432/sylque";
 console.log(connectionString);
 
 module.exports.getProductTypes = async function (callback) {
     var client = new pg.Client(connectionString);
     await client.connect();
-    var res = await client.query("SELECT * FROM products");
+    var res = await client.query("SELECT id, name::bytea, image, price, stock from products");
+    res.rows[2].name = 'Rosé';//fix this later.... caracter encodin problem
     await client.end();
 
     callback(res.rows);
@@ -24,7 +26,7 @@ module.exports.insertOrder = async function (data, callback) {
             let values2 =  [data.id, data.order[i].id];
             await client.query(query2, values2);
         }
-        
+
         await client.end();
 
         callback(res.rows);
