@@ -20,6 +20,10 @@ html {
     padding-bottom: 250px;
 }
 
+.carusel-cation-text{
+    font-weight: 300;
+}
+
 .carousel-caption>.row>.col-md-12>img{
     height: 200px !important;
     width: auto !important;
@@ -87,16 +91,14 @@ html {
 .social-buttons{
     margin-left: 100px;
     margin-right: 100px;
-    padding-top: 20px;
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-top-color: rgb(120, 120, 120);
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
  .social-button{
-     font-size: 30px;
-     padding-left: 20px;
-     padding-right: 20px;
+     font-size: 40px;
+     padding-left: 30px;
+     padding-right: 30px;
      color: #333;
  }
 
