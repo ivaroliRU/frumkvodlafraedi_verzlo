@@ -23,7 +23,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/cart" id="cart">
-                    <div id="karfa-text" style="display: none;">Karfa</div>
+                    <span id="karfa-text" style="display: none;">Karfa</span>
                     <i class="fas fa-shopping-cart"></i>
                 </a>
             </li>
@@ -106,6 +106,7 @@
             <img src="{{this.image}}" alt="" class="front-product-image">
             <h3 id="product-title">{{ this.name }}</h3>
             <p id="product-price">{{ this.price }} ISK</p>
+            <p><b>Forpöntun</b></p>
             <button type="button" class="btn btn-default product-karfa-btn karfa-btn" id="p3-add-to-cart">Bæta við körfu</button>
         </div>
         {{else}}
